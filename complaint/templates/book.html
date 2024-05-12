@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumar</title>
+    <!--  CSS  -->
+    <link rel="icon" type="image/x-icon" href="{% static './assets/icon.png' %}">
+    <link rel="stylesheet" href="{% static './css/book.css' %}">
+    <!-- LIBRARIES -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <!-- NAVBAR -->
+        <section class="header_container">
+            <!-- lateral menu -->
+            <div class="off_screen_menu">
+            <ul>
+                <li><a target="_blank" href="#" >Reservas</a></li>
+                <li><a target="_blank" href="#">Delivery</a></li>
+                <li><a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a></li>
+                <li><hr></li>
+                <li><a href="#nuestrahistoria">Nuestra Historia</a></li>
+                <li><a href="#horario">Horario</a></li>
+                <li><a href="#ubicacion">Ubícanos</a></li>
+                <li><a href="#zonareparto">Zona de Reparto</a></li>
+                <li><a href="#trabajanosotro">Trabaja con Nosotros</a></li>
+            </ul>
+            </div>
+            <!-- navbar -->
+            <nav class="nav">
+                <!-- hamburguer -->
+                <div class="nav_menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <!-- logo -->
+                <div class="nav_logo">
+                    <img src="https://humanidades.com/wp-content/uploads/2017/02/peces-1-e1560951851736.jpg" alt="logo de kumar">
+                </div>
+                <!-- main option -->
+                <div class="nav_buttons">
+                    <a target="_blank" href="#">Reservas</a>
+                    <a target="_blank" href="#">Delivery</a>
+                    <a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a>
+                </div>
+            </nav>
+        </section>
+        <!-- BANNER -->
+        <section class="banner">
+            <h1>Libro de reclamaciones</h1>
+            <span></span>
+            <p>Conforme a lo establecido en código de la Protección y Defensa del consumidor contamos con un Libro de Reclamaciones a tu disposición para que puedas registrar tu queja o reclamo acerca de algún pedido o transacción realizada a través de nuestras páginas.</p>
+        </section>
+    </header>
+
+    <!-- FORM -->
+    <main>
+        <div class="form_container">
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <!-- RECLAMANTE -->
+                <h2>Indetificación del Cosumidor Reclamante</h2>
+
+                <!-- nombre -->
+                <div class="input_box">
+                    <label for="id_reclamante_nombre">Nombre Completo</label>
+                    <input id="id_reclamante_nombre" type="text" required maxlength="50" name="reclamante_nombre">
+                </div>
+                <!-- domicilio -->
+                <div class="input_box">
+                    <label for="id_reclamante_domicilio">Domicilio</label>
+                    <input id="id_reclamante_domicilio" type="text" required maxlength="50" name="reclamante_domicilio">
+                </div>
+                <!-- tipo documento -->
+                <div class="input_select">
+                    <label for="id_reclamante_tipo_documento">Tipo de Documento</label>
+                    <select id="id_reclamante_tipo_documento" required name="reclamante_tipo_documento" >
+                        <option value=>Selecciona un Documento</option>
+                        <option value="dni">Dni</option>
+                        <option value="pasaporte">Pasaporte</option>
+                    </select>
+                </div>
+                <!-- numero documento -->
+                <div class="input_box">
+                    <label for="id_reclamante_numero_documento">Número de Documento</label>
+                    <input id="id_reclamante_numero_documento" type="text" required minlength="8" maxlength="12", name="reclamante_numero_documento">
+                </div>
+                <!-- correo -->
+                <div class="input_box">
+                    <label for="id_reclamante_correo">Correo Electrónico</label>
+                    <input id="id_reclamante_correo" type="email" required maxlength="50" name="reclamante_correo">
+                </div>
+                <!-- numero de contacto -->
+                <div class="input_box">
+                    <label for="id_reclamante_telefono_celular">Teléfono fijo / Celular</label>
+                    <input id="id_reclamante_telefono_celular" type="text" required minlength="7" maxlength="9" name="reclamante_telefono_celular">
+                </div>
+                <!-- menor de edad -->
+                <div class="input_check">
+                    <input id="id_reclamante_menor_edad" type="checkbox" value="menor" name="reclamante_menor_edad" >
+                    <label for="id_reclamante_menor_edad">Soy Menor de Edad</label>
+                </div>
+            
+                <!-- APODERADO -->
+                <div class="form_cotainer_parent">
+                    <!-- nombre -->
+                    <div class="input_box">
+                        <label for="id_apoderado_nombre">Nombre Tutor / Padre / Madre </label>
+                        <input id="id_apoderado_nombre" type="text" maxlength="50" name="apoderado_nombre">
+                    </div>
+                    <!-- domicilio -->
+                    <div class="input_box">
+                        <label for="id_apoderado_domiclio">Domicilio</label>
+                        <input id="id_apoderado_domiclio" type="text" maxlength="50" name="apoderado_domicilio">
+                    </div>
+                    <!-- correo -->
+                    <div class="input_box">
+                        <label for="id_apoderado_correo">Correo Electrónico</label>
+                        <input id="id_apoderado_correo" type="email" maxlength="50" name="apoderado_correo">
+                    </div>
+                    <!-- numero de contacto -->
+                    <div class="input_box">
+                        <label for="id_apoderado_telefono_celular">Teléfono fijo / Celular</label>
+                        <input id="id_apoderado_telefono_celular" type="text" minlength="7" maxlength="9" name="apoderado_telefono_celular">
+                    </div>
+                </div>
+
+                <hr/>
+
+                <!-- BIEN -->
+                <h2>Indetificación del Bien Reclamado</h2>
+                
+                <!-- tipo de bien -->
+                <div class="input_radio">
+                    <input id="id_bien_tipo_p" type="radio" required value="producto" name="bien_tipo">
+                    <label for="id_bien_tipo_p">Producto</label>
+                    <input id="id_bien_tipo_s" type="radio" required value="servicio" name="bien_tipo">
+                    <label for="id_bien_tipo_s">Servicio</label>
+                </div>
+                <!-- monto reclamado -->
+                <div class="input_box">
+                    <label for="id_bien_monto">Monto Reclamado</label>
+                    <input id="id_bien_monto" type="text" required maxlength="7" name="bien_monto">
+                </div>
+                <!-- descripcion -->
+                <div class="input_area">
+                    <label for="id_bien_descripcion">Descripción</label>
+                    <textarea id="id_bien_descripcion" cols="30" required maxlength="255" name="bien_descripcion"></textarea>
+                </div>
+
+                <hr/>
+
+                <!-- RECLAMO -->
+                <h2>Detalle de Reclamación y Pedido del Consumidor</h2>
+                
+                <!-- tipo de reclamo -->
+                <div class="input_radio">
+                    <input id="id_reclamo_tipo_r" type="radio" required value="reclamo" name="reclamo_tipo">
+                    <label for="id_reclamo_tipo_r">Reclamo</label>
+                    <input id="id_reclamo_tipo_q" type="radio" required value="queja" name="reclamo_tipo">
+                    <label for="id_reclamo_tipo_q">Queja</label>
+                </div>
+                <!-- descripcion reclamo -->
+                <div class="input_area">
+                    <label for="id_reclamo_descripcion">Detalle</label>
+                    <textarea id="id_reclamo_descripcion" cols="30" required maxlength="255" name="reclamo_descripcion" ></textarea>
+                </div>
+                <!-- descripcion pedido -->
+                <div class="input_area">
+                    <label for="id_reclamo_pedido">Pedido</label>
+                    <textarea id="id_reclamo_pedido" cols="30" required maxlength="255"  name="reclamo_pedido"></textarea>
+                </div>
+
+                <hr/>
+
+                <!-- INFO -->
+                <div class="input_info">
+                    <p>* La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para interponer una denuncia ante el INDECOPI.</p>
+                    <p>* El proveedor deberá dar respuesta al reclamo en un plazo no mayor a quince (15) días calendario, pudiendo ampliar el plazo hasta por quince (15) días más, previa comunicación al consumidor.</p>
+                </div>
+
+                <!-- BOTON -->
+                <div class="input_button">
+                    <input type="submit" value="Enviar"/>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <!-- INFO -->
+        <section class="info">
+            <!-- LOGO -->
+            <div class="info_logo"> 
+                <img src="{% static './assets/imagen.jpg'%}" alt="logo del restaurante">
+            </div>
+            <!-- SECCION -->
+            <div class="info_seccion">
+                <h3>ACERDA DE KUMAR</h3>
+                <ul>
+                    <li><a href="#nuestrahistoria">Nuestra Historia</a></li>
+                    <li><a href="#horario">Horario</a></li>
+                    <li><a href="#ubicacion">Ubicanos</a></li>
+                    <li><a href="#zonareparto">Zona de Repartos</a></li>
+                    <li><a href="#trabajanosotro">Trabaja con Nosotros</a></li>
+                </ul>
+            </div>
+            <!-- LIBRO-->
+            <div class="info_libro">
+                <h3>MÁS INFORMACIÓN</h3>
+                <span><a href="#">Libro de reclamaciones</a></span>
+            </div>
+            <!-- REDES -->
+            <div class="info_redes">
+                <ul>
+                    <li><a class="insta" target="_blank" href="https://www.instagram.com/cevicheriapuertonuevo/?igsh=MTZuZ3RlMmgybG56bw%3D%3D"></a></li>
+                    <li><a class="face" target="_blank" href="https://www.facebook.com/CevicheriaPuertoNuevo?mibextid=YMEMSu"></a></li>
+                </ul>
+            </div>
+        </section>
+        <!-- COPY RIGHT -->
+        <div class="copyright">
+            <span>Restaurante Kumar 2024, Todos los derechos reservados</span>
+        </div>
+    </footer>
+
+    <!-- EXTRA -->
+    <div id="extra">
+        <!-- FIXED BUTTONS -->
+        <div class="extra_button" >
+            <a class="wp"  target="_blank" data-aos="zoom-in-up" href="https://wa.me/51981453194?text=I'm%20interested%20in%20your%20car%20for%20sale">
+                <img src="{% static './assets/Print_Glyph_White.png'%}" alt="Chat on WhatsApp" />
+            </a>
+            <a class="top" data-aos="zoom-in-up" href="#header">
+                <img src="{% static './assets/icon.png'%}" alt="Flecha hacia arriba" />
+            </a>
+        </div>
+        <!-- FIXED OPTIONS -->
+        <div class="extra_option" data-aos="zoom-in-up">
+            <a target="_blank" href="#">Reservas</a>
+            <a target="_blank" href="#">Delivery</a>
+            <a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a>      
+        </div>
+    </div>
+
+    <script src="{% static './js/book.js' %}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    
+</body>
+</html>

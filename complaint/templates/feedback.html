@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumar</title>
+    <!--  CSS  -->
+    <link rel="icon" type="image/x-icon" href="{% static './assets/icon.png' %}">
+    <link rel="stylesheet" href="{% static './css/feedback.css' %}">
+</head>
+<body>
+    <div class="message">
+        <!-- condicion if -->
+        <div class="positive">
+            <!-- title -->
+            <h1>Formulario Enviado</h1>
+            <!-- message -->
+            <p>El reclamo fue registrado exitosamente, gracias por su comprensión.</p>
+            <!-- observation -->
+            <ul>
+                <li> - obse 1</li>
+                <li> - obse 2</li>
+                <li> - obse 3</li>
+            </ul>
+        </div>
+
+        <!-- condicion else -->
+        <div class="negative">
+            <!-- title -->
+            <h1>Formulario No Enviado</h1>
+            <!-- message - -->
+            <p>El reclamo no pudo ser registrado, llenar correctamente</p>
+            <!-- errors -->
+            <ul>
+                <li>- error 1</li>
+                <li>- error 2</li>
+                <li>- error 3</li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>

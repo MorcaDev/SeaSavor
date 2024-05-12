@@ -1,0 +1,358 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumar</title>
+    <meta name="description" content="Bienvenido a nuestra cevichería, donde disfrutarás de deliciosos platillos de mariscos frescos, incluyendo ceviche y otras especialidades de la cocina peruana. ¡Ven y disfruta de una experiencia culinaria única con nosotros!">
+    <meta name="keywords" content="cevichería, restaurante de mariscos, pescado, mariscos, ceviche, comida peruana">
+    <!--  CSS  -->
+    <link rel="icon" type="image/x-icon" href="{% static './assets/icon.png' %}">
+    <link rel="stylesheet" href="{% static './css/home.css' %}">
+    <!-- LIBRARIES -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <!-- NAVBAR -->
+        <section class="header_container">
+            <!-- lateral menu -->
+            <div class="off_screen_menu">
+            <ul>
+                <li><a target="_blank" href="#" >Reservas</a></li>
+                <li><a target="_blank" href="#">Delivery</a></li>
+                <li><a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a></li>
+                <li><hr></li>
+                <li><a href="#nuestrahistoria">Nuestra Historia</a></li>
+                <li><a href="#horario">Horario</a></li>
+                <li><a href="#ubicacion">Ubícanos</a></li>
+                <li><a href="#zonareparto">Zona de Reparto</a></li>
+                <li><a href="#trabajanosotro">Trabaja con Nosotros</a></li>
+            </ul>
+            </div>
+            <!-- navbar -->
+            <nav class="nav">
+                <!-- hamburguer -->
+                <div class="nav_menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <!-- logo -->
+                <div class="nav_logo">
+                    <img src="https://humanidades.com/wp-content/uploads/2017/02/peces-1-e1560951851736.jpg" alt="logo de kumar">
+                </div>
+                <!-- main option -->
+                <div class="nav_buttons">
+                    <a target="_blank" href="#">Reservas</a>
+                    <a target="_blank" href="#">Delivery</a>
+                    <a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a>
+                </div>
+            </nav>
+        </section>
+        <!-- BANNER -->
+        <section class="banner">
+            <img src="{% static './assets/imagen.jpg'%}" alt="logo de marca">
+            <h1>Kumar, el sabor que llega hasta tu hogar</h1>
+            <div>
+                <a target="_blank" href="{% url 'home' %}">Reservas</a>
+                <a target="_blank" href="{% url 'home' %}">Delivery</a>
+                <a target="_blank" href="{% static './assets/menu.pdf'%}">Menu</a>
+            </div>
+        </section>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- NUESTRA HISTORIA -->
+        <section id="nuestrahistoria">
+            <!-- IMAGEN -->
+            <div class="nuestrahistoria_imagen" data-aos="zoom-in-up" data-aos-duration="600">
+                <img src="{% static './assets/imagen.jpg'%}" alt="Imagen promocional">
+            </div>
+            <!-- HISTORIA -->
+            <div class="nuestrahistoria_historia"  data-aos="fade-up" data-aos-duration="600">
+                <h2>NUESTRA HISTORIA</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex debitis repellendus ratione architecto ullam aperiam quis inventore illum, culpa beatae quisquam dolorem modi nam labore iure, perferendis eaque facere? Doloribus.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque voluptate accusantium veniam commodi minima possimus. Iusto, ea illum quidem ullam architecto eos quis alias quia delectus earum corporis soluta labore!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, dolore. Nam laborum odit tempore quo voluptatem fuga doloribus praesentium! Dolorum sapiente tempora iure consequatur atque suscipit. Iste repudiandae ad suscipit.</p>
+            </div>
+        </section>
+        <!-- HORARIO -->
+        <section id="horario">
+            <!-- IMAGEN -->
+            <div class="horario_imagen" data-aos="zoom-in-up" data-aos-duration="600">
+                <img src="{% static './assets/imagen.jpg'%}" alt="horario del restaurante">
+            </div>
+            <!-- HORARIO -->
+            <div class="horario_horario" data-aos="fade-up" data-aos-duration="600">
+                <h2>HORARIOS</h2>
+                <ul>
+                    <li><p><strong>SALÓN :</strong><br><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores reiciendis praesentium </p></li>
+                    <li><p><strong>DELIVERY :</strong><br/><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores reiciendis praesentium </p></li>
+                    <li><p><strong>PARA LLEVAR :</strong><br/><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores reiciendis praesentium </p></li>
+                </ul>
+            </div>
+        </section>
+        <!-- CARTA -->
+        <section id="carta">
+            <!-- CARTA -->
+            <div class="carta_titulo" data-aos="fade-up" data-aos-duration="600">
+                <h2>NUESTRA CARTA</h2>
+                <span></span>
+            </div>
+            <!-- ENTRADA_PIQUEO -->
+            <div class="carta_seccion">
+                <h3>Entradas y Piqueos</h3>
+                <ul>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/00.00</span></li>
+                </ul>
+                <hr>
+            </div>
+            <!-- GUARNICIONES -->
+            <div class="carta_seccion">
+                <h3>Guarniciones</h3>
+                <ul>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                </ul>
+                <hr/>
+            </div>
+            <!-- POLLO_BRASA -->
+            <div class="carta_seccion">
+                <h3>Pollo a la Brasa</h3>
+                <ul>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                </ul>
+                <hr/>
+            </div>
+            <!-- ESPECIALIDADES A LA PARRILLA -->
+            <div class="carta_seccion">
+                <h3>TÍTULO DE LA SECCIÓN</h3>
+                <ul>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                </ul>
+                <hr/>
+            </div>
+            <!-- ENSALADAS -->
+            <div class="carta_seccion">
+                <h3>TÍTULO DE LA SECCIÓN</h3>
+                <ul>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                    <li>
+                        <p>Nombre del Plato Producido Por La Cevicheria</p>
+                        <span>S/0.00</span>
+                        <p class="carta_seccion_desc">descripción del plato , ingredientes, ingredientes, ingredientes, ingredientes etc.</p>
+                    </li>
+                </ul>
+                <hr/>
+            </div>
+            <!-- BEBIDAS -->
+            <div class="carta_seccion">
+                <h3>TÍTULO DE LA SECCIÓN</h3>
+                <ul>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                </ul>
+                <hr/>
+            </div>
+            <!-- POSTRES -->
+            <div class="carta_seccion">
+                <h3>TÍTULO DE LA SECCIÓN</h3>
+                <ul>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                    <li><p>Nombre del Plato Producido Por La Cevicheria</p><span>S/0.00</span></li>
+                </ul>
+                <hr/>
+            </div>
+        </section>
+        <!-- UBICACION -->
+        <section id="ubicacion" data-aos="zoom-in-up" data-aos-duration="600">
+            <h2>UBICANOS</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243.84170665882263!2d-77.03231180548286!3d-12.080127964446866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c88b5f89ba8f%3A0xf94e45f876e206ac!2sAv.%20Militar%201598%2C%20Lince%2015046!5e0!3m2!1ses-419!2spe!4v1713570615043!5m2!1ses-419!2spe" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+        <!-- ZONA DE REPARTO -->
+        <section id="zonareparto">
+            <!-- IMAGEN -->
+            <div class="zonareparto_imagen" data-aos="zoom-in-up" data-aos-duration="600">
+                <img src="{% static './assets/imagen.jpg'%}" alt="mapa con zonas delimitadas para el delivery">
+            </div>
+            <!-- ZONA DE REPARTO -->
+            <div class="zonareparto_zonareparto" data-aos="fade-up"  data-aos-duration="600">
+                <h2>ZONAS DE REPARTO</h2>
+                <ul>
+                    <li><span class="zonareparto_zonareparto_a"></span><p>ZONA A</p></li>
+                    <li><span class="zonareparto_zonareparto_b"></span><p>ZONA B</p></li>
+                    <li><span class="zonareparto_zonareparto_c"></span><p>ZONA C</p></li>
+                    <li><span class="zonareparto_zonareparto_d"></span><p>ZONA D</p></li>
+                    <li><span class="zonareparto_zonareparto_e"></span><p>ZONA E</p></li>
+                </ul>
+            </div>
+        </section>
+        <!-- TRABAJA CON NOSOTROS -->
+        <section id="trabajanosotro">
+            <!-- IMAGEN -->
+            <div class="trabajanosotro_imagen" data-aos="zoom-in-up" data-aos-duration="600">
+                <img src="{% static './assets/imagen.jpg'%}" alt="grupo de trabajadores sonriendo en la empresa">
+            </div>
+            <!-- DESCRIPCION -->
+            <div class="trabajanosotro_trabajanosotro" data-aos="fade-up"  data-aos-duration="600">
+                <h2>TRABAJA CON NOSOTROS</h2>
+                <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi accusamus optio praesentium ducimus molestias adipisci tempore cumque deleniti aperiam amet vel, velit tenetur atque ab magni ut assumenda maxime excepturi.</P>
+                <p><strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</strong></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <!-- INFO -->
+        <section class="info">
+            <!-- LOGO -->
+            <div class="info_logo"> 
+                <img src="{% static './assets/imagen.jpg'%}" alt="logo del restaurante">
+            </div>
+            <!-- SECCION -->
+            <div class="info_seccion">
+                <h3>ACERDA DE KUMAR</h3>
+                <ul>
+                    <li><a href="#nuestrahistoria">Nuestra Historia</a></li>
+                    <li><a href="#horario">Horario</a></li>
+                    <li><a href="#ubicacion">Ubicanos</a></li>
+                    <li><a href="#zonareparto">Zona de Repartos</a></li>
+                    <li><a href="#trabajanosotro">Trabaja con Nosotros</a></li>
+                </ul>
+            </div>
+            <!-- LIBRO-->
+            <div class="info_libro">
+                <h3>MÁS INFORMACIÓN</h3>
+                <span><a target="_blank" href="#">Libro de reclamaciones</a></span>
+            </div>
+            <!-- REDES -->
+            <div class="info_redes">
+                <ul>
+                    <li><a class="insta" target="_blank" href="https://www.instagram.com/cevicheriapuertonuevo/?igsh=MTZuZ3RlMmgybG56bw%3D%3D"></a></li>
+                    <li><a class="face" target="_blank" href="https://www.facebook.com/CevicheriaPuertoNuevo?mibextid=YMEMSu"></a></li>
+                </ul>
+            </div>
+        </section>
+        <!-- COPY RIGHT -->
+        <div class="copyright">
+            <span>Restaurante Kumar 2024, Todos los derechos reservados</span>
+        </div>
+    </footer>
+
+    <!-- EXTRA -->
+    <div id="extra">
+        <!-- FIXED BUTTONS -->
+        <div class="extra_button" >
+            <a class="wp"  target="_blank" data-aos="zoom-in-up" href="https://wa.me/51981453194?text=I'm%20interested%20in%20your%20car%20for%20sale">
+                <img src="{% static './assets/Print_Glyph_White.png'%}" alt="Chat on WhatsApp" />
+            </a>
+            <a class="top" data-aos="zoom-in-up" href="#header">
+                <img src="{% static './assets/icon.png'%}" alt="Flecha hacia arriba" />
+            </a>
+        </div>
+        <!-- FIXED OPTIONS -->
+        <div class="extra_option" data-aos="zoom-in-up">
+            <a target="_blank" href="#">Reservas</a>
+            <a target="_blank" href="#">Delivery</a>
+            <a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a>      
+        </div>
+    </div>
+
+    <script src="{% static './js/home.js' %}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

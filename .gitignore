@@ -1,0 +1,9 @@
+# extensions
+*.env
+*db.sqlite3
+*.pdf
+
+# paths
+__pycache__
+/media/doc
+/venv
