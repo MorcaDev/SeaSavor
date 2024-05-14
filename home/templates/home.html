@@ -8,8 +8,8 @@
     <meta name="description" content="Bienvenido a nuestra cevichería, donde disfrutarás de deliciosos platillos de mariscos frescos, incluyendo ceviche y otras especialidades de la cocina peruana. ¡Ven y disfruta de una experiencia culinaria única con nosotros!">
     <meta name="keywords" content="cevichería, restaurante de mariscos, pescado, mariscos, ceviche, comida peruana">
     <!--  CSS  -->
-    <link rel="icon" type="image/x-icon" href="{% static './assets/icon.png' %}">
-    <link rel="stylesheet" href="{% static './css/home.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'home/assets/icon.png' %}">
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
     <!-- LIBRARIES -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
             <ul>
                 <li><a target="_blank" href="#" >Reservas</a></li>
                 <li><a target="_blank" href="#">Delivery</a></li>
-                <li><a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a></li>
+                <li><a target="_blank" href="{% static 'home/assets/menu.pdf'%}">Carta</a></li>
                 <li><hr></li>
                 <li><a href="#nuestrahistoria">Nuestra Historia</a></li>
                 <li><a href="#horario">Horario</a></li>
@@ -51,18 +51,18 @@
                 <div class="nav_buttons">
                     <a target="_blank" href="#">Reservas</a>
                     <a target="_blank" href="#">Delivery</a>
-                    <a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a>
+                    <a target="_blank" href="{% static 'home/assets/menu.pdf'%}">Carta</a>
                 </div>
             </nav>
         </section>
         <!-- BANNER -->
         <section class="banner">
-            <img src="{% static './assets/imagen.jpg'%}" alt="logo de marca">
+            <img src="{% static 'home/assets/imagen.jpg'%}" alt="logo de marca">
             <h1>Kumar, el sabor que llega hasta tu hogar</h1>
             <div>
                 <a target="_blank" href="{% url 'home' %}">Reservas</a>
                 <a target="_blank" href="{% url 'home' %}">Delivery</a>
-                <a target="_blank" href="{% static './assets/menu.pdf'%}">Menu</a>
+                <a target="_blank" href="{% static 'home/assets/menu.pdf'%}">Menu</a>
             </div>
         </section>
     </header>
@@ -73,7 +73,7 @@
         <section id="nuestrahistoria">
             <!-- IMAGEN -->
             <div class="nuestrahistoria_imagen" data-aos="zoom-in-up" data-aos-duration="600">
-                <img src="{% static './assets/imagen.jpg'%}" alt="Imagen promocional">
+                <img src="{% static 'home/assets/imagen.jpg'%}" alt="Imagen promocional">
             </div>
             <!-- HISTORIA -->
             <div class="nuestrahistoria_historia"  data-aos="fade-up" data-aos-duration="600">
@@ -87,7 +87,7 @@
         <section id="horario">
             <!-- IMAGEN -->
             <div class="horario_imagen" data-aos="zoom-in-up" data-aos-duration="600">
-                <img src="{% static './assets/imagen.jpg'%}" alt="horario del restaurante">
+                <img src="{% static 'home/assets/imagen.jpg'%}" alt="horario del restaurante">
             </div>
             <!-- HORARIO -->
             <div class="horario_horario" data-aos="fade-up" data-aos-duration="600">
@@ -263,7 +263,7 @@
         <section id="zonareparto">
             <!-- IMAGEN -->
             <div class="zonareparto_imagen" data-aos="zoom-in-up" data-aos-duration="600">
-                <img src="{% static './assets/imagen.jpg'%}" alt="mapa con zonas delimitadas para el delivery">
+                <img src="{% static 'home/assets/imagen.jpg'%}" alt="mapa con zonas delimitadas para el delivery">
             </div>
             <!-- ZONA DE REPARTO -->
             <div class="zonareparto_zonareparto" data-aos="fade-up"  data-aos-duration="600">
@@ -281,7 +281,7 @@
         <section id="trabajanosotro">
             <!-- IMAGEN -->
             <div class="trabajanosotro_imagen" data-aos="zoom-in-up" data-aos-duration="600">
-                <img src="{% static './assets/imagen.jpg'%}" alt="grupo de trabajadores sonriendo en la empresa">
+                <img src="{% static 'home/assets/imagen.jpg'%}" alt="grupo de trabajadores sonriendo en la empresa">
             </div>
             <!-- DESCRIPCION -->
             <div class="trabajanosotro_trabajanosotro" data-aos="fade-up"  data-aos-duration="600">
@@ -298,7 +298,7 @@
         <section class="info">
             <!-- LOGO -->
             <div class="info_logo"> 
-                <img src="{% static './assets/imagen.jpg'%}" alt="logo del restaurante">
+                <img src="{% static 'home/assets/imagen.jpg'%}" alt="logo del restaurante">
             </div>
             <!-- SECCION -->
             <div class="info_seccion">
@@ -335,21 +335,21 @@
         <!-- FIXED BUTTONS -->
         <div class="extra_button" >
             <a class="wp"  target="_blank" data-aos="zoom-in-up" href="https://wa.me/51981453194?text=I'm%20interested%20in%20your%20car%20for%20sale">
-                <img src="{% static './assets/Print_Glyph_White.png'%}" alt="Chat on WhatsApp" />
+                <img src="{% static 'home/assets/Print_Glyph_White.png'%}" alt="Chat on WhatsApp" />
             </a>
             <a class="top" data-aos="zoom-in-up" href="#header">
-                <img src="{% static './assets/icon.png'%}" alt="Flecha hacia arriba" />
+                <img src="{% static 'home/assets/icon.png'%}" alt="Flecha hacia arriba" />
             </a>
         </div>
         <!-- FIXED OPTIONS -->
         <div class="extra_option" data-aos="zoom-in-up">
             <a target="_blank" href="#">Reservas</a>
             <a target="_blank" href="#">Delivery</a>
-            <a target="_blank" href="{% static './assets/menu.pdf'%}">Carta</a>      
+            <a target="_blank" href="{% static 'home/assets/menu.pdf'%}">Carta</a>      
         </div>
     </div>
 
-    <script src="{% static './js/home.js' %}"></script>
+    <script src="{% static 'home/js/home.js' %}"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();

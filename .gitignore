@@ -4,6 +4,7 @@
 *.pdf
 
 # paths
+/staticfiles-cdn
 __pycache__
-/media/doc
+/complaint/media/doc
 /venv

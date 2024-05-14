@@ -1,4 +1,3 @@
-
 // elements from html
 const hamMenu       = document.querySelector(".nav_menu");
 const offScreenMenu = document.querySelector(".off_screen_menu");

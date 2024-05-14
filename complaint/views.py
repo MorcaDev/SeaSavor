@@ -1,62 +1,72 @@
-from django.shortcuts import render,redirect
-from django.views.decorators.http import require_http_methods
+from django.shortcuts import render
+from django.http import JsonResponse
 from .oop import Formulario
 from .models import LibroRelamacion
-
-from django.http import HttpResponse
-from datetime import date
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK,HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR, HTTP_503_SERVICE_UNAVAILABLE
 
 # Create your views here.
-@require_http_methods(["GET", "POST"])
+@api_view(["GET", "POST"])
 def libro(request):
 
-    # http request method
-    method = request.method 
+    if request.method == 'GET':
+        return  render(request, 'book.html')
 
-    # catch data from form
-    if method == 'POST' :
+    if request.method  == 'POST':
 
-        # catch data
-        id         = LibroRelamacion.objects.order_by("-id")[0].id + 1
+        # request
         formulario = Formulario(
-            id,
-            request.POST.get("reclamante_nombre"),
-            request.POST.get("reclamante_domicilio"),
-            request.POST.get("reclamante_tipo_documento"),
-            request.POST.get("reclamante_numero_documento"),
-            request.POST.get("reclamante_correo"),
-            request.POST.get("reclamante_telefono_celular"),
-            request.POST.get("reclamante_menor_edad"),
-            request.POST.get("apoderado_nombre"),
-            request.POST.get("apoderado_domicilio"),
-            request.POST.get("apoderado_correo"),
-            request.POST.get("apoderado_telefono_celular"),
-            request.POST.get("bien_tipo"),
-            request.POST.get("bien_monto"),
-            request.POST.get("bien_descripcion"),
-            request.POST.get("reclamo_tipo"),
-            request.POST.get("reclamo_descripcion"),
-            request.POST.get("reclamo_pedido"),
+            id = LibroRelamacion.objects.order_by("-id")[0].id + 1,
+            reclamante_nombre = request.data.get("reclamante_nombre",None),
+            reclamante_domicilio = request.data.get("reclamante_domicilio",None),
+            reclamante_tipo_documento = request.data.get("reclamante_tipo_documento",None),
+            reclamante_numero_documento = request.data.get("reclamante_numero_documento",None),
+            reclamante_correo = request.data.get("reclamante_correo",None),
+            reclamante_telefono_celular = request.data.get("reclamante_telefono_celular",None),
+            reclamante_menor_edad =request.data.get("reclamante_menor_edad","mayor"),
+            apoderado_nombre = request.data.get("apoderado_nombre",None),
+            apoderado_domicilio = request.data.get("apoderado_domicilio",None),
+            apoderado_correo = request.data.get("apoderado_correo",None),
+            apoderado_telefono_celular = request.data.get("apoderado_telefono_celular",None),
+            bien_tipo = request.data.get("bien_tipo",None),
+            bien_monto = request.data.get("bien_monto",None),
+            bien_descripcion = request.data.get("bien_descripcion",None),
+            reclamo_tipo  = request.data.get("reclamo_tipo",None),
+            reclamo_descripcion = request.data.get("reclamo_descripcion",None),
+            reclamo_pedido = request.data.get("reclamo_pedido",None),
         )
 
-        # no previous insert
+        # validations
+        if not formulario.apply_validations() :
+            return Response({
+                "message"   :"error",
+                "error"     :formulario.errors}, 
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        # no repetition
         previous = LibroRelamacion.objects.filter(
             reclamante_numero_documento = formulario.reclamante_numero_documento,
-            reclamo_fecha = date.today()
+            reclamante_correo = formulario.reclamante_correo,
+            reclamo_fecha = formulario.reclamo_fecha
         )
-
         if previous.exists():
-            return HttpResponse("<h1>ERROR REPITITION</h1>")   
+            return Response({   
+                "message"   :"error",
+                "error"     :"Tiene un registro existente hace menos de 24hr"}, 
+                status=HTTP_400_BAD_REQUEST
+            )   
 
-        # apply filters
-        if not formulario.apply_filters() :
-            return HttpResponse("<h1>ERROR PDF</h1>")
-        
-        # create pdf
+        # pdf 
         if not formulario.create_pdf() :
-            return HttpResponse("<h1>ERROR PDF</h1>")
+            return Response({
+                "message"   :"error",
+                "error"     :formulario.errors}, 
+                status=HTTP_500_INTERNAL_SERVER_ERROR
+            )
         
-        # create and save  instance
+        # db
         try :
             new_instance = LibroRelamacion(
                 id = formulario.id,
@@ -85,19 +95,20 @@ def libro(request):
 
         except:
 
-            return HttpResponse("<h1>ERROR INSTANCE</h1>")
+            return Response({
+                "message"   :"error",
+                "error"     :formulario.errors},
+                status=HTTP_500_INTERNAL_SERVER_ERROR
+            )
         
-        # send email
+        # email
         if not formulario.send_email() :
-            return HttpResponse("<h1>OBSERVATION EMAIL</h1>")
+            return Response({
+                "message"   :"error",
+                "error"     :formulario.errors}, 
+                status=HTTP_503_SERVICE_UNAVAILABLE
+            )
 
         # feedback 
-        return  HttpResponse("<h1>GOOD FEEDBACK</h1>")
+        return  Response({"message":"success"},status = HTTP_200_OK)
     
-    # load form page
-    return  render(request, 'book.html')
-
-@require_http_methods("GET")
-def feedback(request):
-
-    return render(request, 'feedback.html',{})
