@@ -19,21 +19,22 @@
 <body>
     <!-- HEADER -->
     <header id="header">
-        <!-- NAVBAR -->
-        <section class="header_container">
+        <!-- NAVBAR CONTAINER -->
+        <section class="nav_container">
             <!-- lateral menu -->
             <div class="off_screen_menu">
-            <ul>
-                <li><a target="_blank" href="#" >Reservas</a></li>
-                <li><a target="_blank" href="#">Delivery</a></li>
-                <li><a target="_blank" href="{% static 'home/assets/menu.pdf'%}">Carta</a></li>
-                <li><hr></li>
-                <li><a href="#nuestrahistoria">Nuestra Historia</a></li>
-                <li><a href="#horario">Horario</a></li>
-                <li><a href="#ubicacion">Ubícanos</a></li>
-                <li><a href="#zonareparto">Zona de Reparto</a></li>
-                <li><a href="#trabajanosotro">Trabaja con Nosotros</a></li>
-            </ul>
+                <!-- options -->
+                <ul>
+                    <li><a target="_blank" href="#" >Reservas</a></li>
+                    <li><a target="_blank" href="#">Delivery</a></li>
+                    <li><a target="_blank" href="{% static 'home/assets/menu.pdf'%}">Carta</a></li>
+                    <li><hr></li>
+                    <li><a href="#nuestrahistoria">Nuestra Historia</a></li>
+                    <li><a href="#horario">Horario</a></li>
+                    <li><a href="#ubicacion">Ubícanos</a></li>
+                    <li><a href="#zonareparto">Zona de Reparto</a></li>
+                    <li><a href="#trabajanosotro">Trabaja con Nosotros</a></li>
+                </ul>
             </div>
             <!-- navbar -->
             <nav class="nav">
@@ -314,7 +315,7 @@
             <!-- LIBRO-->
             <div class="info_libro">
                 <h3>MÁS INFORMACIÓN</h3>
-                <span><a target="_blank" href="#">Libro de reclamaciones</a></span>
+                <span><a href="{% url 'libro' %}">Libro de reclamaciones</a></span>
             </div>
             <!-- REDES -->
             <div class="info_redes">

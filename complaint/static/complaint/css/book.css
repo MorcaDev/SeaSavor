@@ -31,8 +31,10 @@ header{
     width: 100%;
     height: auto;
 }
-    .header_container{
+    .nav_container{
+        display: none;
         width: 100%;
+        height: auto;
         position: fixed;
         top: 0;
         left: 0;
@@ -41,8 +43,7 @@ header{
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
         opacity: 0;
-    }
-    .header_container.active{
+    }.nav_container.active{
         display: block;
         background-color: rgb(34, 37, 49) !important;
         position: fixed;
@@ -50,7 +51,6 @@ header{
         -webkit-box-shadow: 0 1px 5px rgb(0 0 0 / 25%);
         box-shadow: 0 1px 5px rgb(0 0 0 / 25%);
         opacity: 1;
-        /* cursor: pointer; */
     }
         .off_screen_menu {
             position: fixed;
@@ -64,6 +64,8 @@ header{
             transition: .3s ease;
             background-color:  rgb(34, 37, 49);
             
+        }.off_screen_menu.active {
+            left: 0;
         }
             .off_screen_menu ul{
                 display: block;
@@ -87,26 +89,23 @@ header{
                     .off_screen_menu li a:hover {
                         color: #6F86FF;
                     }
-        .off_screen_menu.active {
-            left: 0;
-        }
         .nav {
-                display: flex;
-                flex-flow: row nowrap;
-                align-items: center;
-                width: 100%;
-                height: auto;
-                padding: 6px 16px;
-                background-color: rgb(34, 37, 49) ;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            width: 100%;
+            height: auto;
+            padding: 6px 16px;
+            background-color: rgb(34, 37, 49) ;
         }
             .nav_menu {
-                    display: inline-block;
-                    position: relative;
-                    margin-right: 15px;
-                    height: 50px;
-                    width: 25px;
-                    cursor: pointer;
-                }
+                display: inline-block;
+                position: relative;
+                margin-right: 15px;
+                height: 50px;
+                width: 25px;
+                cursor: pointer;
+            }
                 .nav_menu span {
                         height: 2px;
                         width: 100%;
