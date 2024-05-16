@@ -40,12 +40,12 @@ class LibroRelamacion(models.Model):
         ("reclamo","RECLAMO"),
         ("queja","QUEJA"),
     ])
+    reclamo_pedido      = models.TextField(max_length=100,blank=False, null=False)
     reclamo_descripcion = models.TextField(max_length=255,blank=False, null=False)
-    reclamo_pedido      = models.TextField(max_length=255,blank=False, null=False)
     reclamo_fecha       = models.DateField(blank=False, null=False)
 
     # del seguimiento
-    reclamo_pdf         = models.FileField(upload_to="reclamos/", blank=False, null=False)
+    reclamo_pdf         = models.FileField(upload_to="reclamos/", blank=True, null=True)
     solucion_pdf        = models.FileField(upload_to="soluciones/", blank=True, null=True)
 
     class Meta:

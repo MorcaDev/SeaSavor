@@ -1,5 +1,9 @@
-# LIBRARIES FOR REGEX
+# LIBRARIES FOR REGEX , MATH
 import re
+import math
+
+# LIBRARIES FOR OOP
+from abc import ABC, abstractmethod 
 
 # LIBRARIES FOR ROOTS
 from pathlib import Path
@@ -8,9 +12,6 @@ from decouple import config
 # LIBRARIES FOR PDF
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
-
-# DATE MODULE
-from datetime import date
 
 # LIBRARIES FOR SENDING EMAILS
 import smtplib
@@ -397,12 +398,12 @@ class Item(Validations):
 
 class Claim(Validations):
 
-    def __init__(self,reclamo_tipo,reclamo_descripcion,reclamo_pedido) -> None:
+    def __init__(self,reclamo_tipo,reclamo_descripcion,reclamo_pedido,reclamo_fecha) -> None:
 
         self.reclamo_tipo                = reclamo_tipo
         self.reclamo_descripcion         = reclamo_descripcion
         self.reclamo_pedido              = reclamo_pedido
-        self.reclamo_fecha               = str(date.today())
+        self.reclamo_fecha               = reclamo_fecha
 
     def __valid_claim_list(self):
 
@@ -454,15 +455,216 @@ class Claim(Validations):
 
         return True
 
-class Formulario(Claimant, Father, Item, Claim):
+class Pdf(ABC):
 
-    def __init__(self,id,reclamante_nombre,reclamante_domicilio,reclamante_tipo_documento,reclamante_numero_documento,reclamante_correo,reclamante_telefono_celular,reclamante_menor_edad,apoderado_nombre, apoderado_domicilio, apoderado_correo,apoderado_telefono_celular,bien_tipo,bien_monto,bien_descripcion,reclamo_tipo,reclamo_descripcion,reclamo_pedido) -> None:
+    def __divide_long_text(self, text, x):
+
+        long_text       = text
+        len_text        = len(text)
+        text_area       = A4[0] - x                             
+        char_len        = 20/4                                     
+        total_char_fea  = math.floor(text_area / char_len)          
+        total_lines     = math.floor(len_text / total_char_fea)            
+        lines           = []
+
+        for i in range(0, total_lines+1):
+            
+            lines.append(long_text[total_char_fea*i:total_char_fea*(i+1)])
+        
+        return lines
+
+    def __create_text_object(self, canvas,text, x, y, fontsize):
+
+        canvas.setFontSize(fontsize)
+        text_object     = canvas.beginText(x,y)
+        lines           = self.__divide_long_text(text,x)
+        
+        for line in lines:
+            text_object.textLine(line)
+
+        print("2nd method")
+        return text_object
+
+    @abstractmethod
+    def create_pdf(self):
+
+        try:
+
+            # GENERAL VARIABLES
+            BASE_DIR            = Path(__file__).resolve().parent.parent
+            file_name           = f"rv_{self.id}.pdf"
+            file_path           = f"{BASE_DIR}/complaint/media/reclamos/{file_name}"
+            file_format         = "A4"
+            file_title          = f"Reclamo N°{self.id}"
+            file_restaurante    = "Cevicheria Puerto Nuevo"
+            file_ruc            = f"RUC - 20504332340"
+            message_one         = 'Estimado usuario, Su solicitud está en conocimiento de las autoridades, la cual se está analizando para emitir una respuesta y posible solución en un plazo máximo de 15 días. Conforme a lo establecido en el Código de Protección y Defensa del Consumidor este establecimiento cuenta con un Libro de Reclamaciones a tu disposición.'
+            file_number         = f"HOJA DE RECLAMACIÓN - N°{self.id}"
+            section             = [
+                'Del Reclamante',
+                'Del Apoderado',
+                'Del Bien',
+                'Del Reclamo',
+            ]
+
+            # PDF ::::::: VARIABLES FOR SIZE
+            width, height = A4
+            y       = 0
+            y_middle= height // 2
+            y_end   = round(height)
+            x       = 0
+            x_middle= width // 2
+            x_end   = round(width)
+            tab_one = 20
+            tab_two = 30
+
+            # PDF ::::::: CREATING
+            pdf = canvas.Canvas(
+                filename= file_path,
+                pagesize= file_format
+            )
+
+            # PDF ::::::: TITLE
+            pdf.setTitle(file_title)
+
+            # HEADER ::::: NOMBRE + RUC
+            pdf.setFontSize(20)
+            pdf.drawString(tab_one,y_end-80,file_restaurante)
+            pdf.setFontSize(15)
+            pdf.drawString(tab_one,y_end-110,file_ruc)
+
+            # HEADER :::::: MESSAGE 
+            print("before")
+            text = self.__create_text_object(pdf,message_one,tab_one,y_end-143,11)
+            pdf.drawText(text)
+            print("later")
+
+            # HEADER :::::: NUMBER OF CLAIMANT
+            pdf.rect(tab_one, y_end-230, x_middle-15,30)
+            pdf.setFontSize(15)
+            pdf.drawString(tab_two, y_end-222, file_number)
+
+            # BODY :::::::: USER 
+            pdf.setFontSize(13)
+            pdf.drawString(tab_one,y_middle+150,section[0])
+            pdf.line(tab_one, y_middle+145, x_middle, y_middle+145)
+            pdf.setFontSize(11)
+            pdf.drawString(tab_two,y_middle+130,f'- Nombre : {self.reclamante_nombre}')
+            pdf.drawString(tab_two,y_middle+115,f'- Domicilio : {self.reclamante_domicilio}')
+            pdf.drawString(tab_two,y_middle+100,f'- Tipo Documento : {self.reclamante_tipo_documento}')
+            pdf.drawString(tab_two,y_middle+85,f'- Numero Documento : {self.reclamante_numero_documento}')
+            pdf.drawString(tab_two,y_middle+70,f'- Correo : {self.reclamante_correo}')
+            pdf.drawString(tab_two,y_middle+55,f'- Telefono / Celular : {self.reclamante_telefono_celular}')
+            pdf.drawString(tab_two,y_middle+40,f'- Edad : {self.reclamante_menor_edad}')
+
+            # BODY :::::::: FATHER
+            pdf.setFontSize(13)
+            pdf.drawString(tab_one,y_middle,section[1])
+            pdf.line(tab_one, y_middle-5, x_middle, y_middle-5)
+            pdf.setFontSize(11)
+            pdf.drawString(tab_two,y_middle-20,f'- Nombre : {self.apoderado_nombre}')
+            pdf.drawString(tab_two,y_middle-35,f'- Domicilio : {self.apoderado_domicilio}')
+            pdf.drawString(tab_two,y_middle-50,f'- Correo : {self.apoderado_correo}')
+            pdf.drawString(tab_two,y_middle-65,f'- Telefono : {self.apoderado_telefono_celular}')
+
+            # BODY :::::::: ITEM
+            pdf.setFontSize(13)
+            pdf.drawString(tab_one,y_middle-105,section[2])
+            pdf.line(tab_one, y_middle-110, x_middle+15, y_middle-110)
+            pdf.setFontSize(11)
+            pdf.drawString(tab_two,y_middle-125,f'- Tipo : {self.bien_tipo}')
+            pdf.drawString(tab_two,y_middle-140,f'- Monto : {self.bien_monto}')
+            pdf.drawString(tab_two,y_middle-155,f'- Descripción : ')
+            text = self.__create_text_object(pdf,self.bien_descripcion,x+105,y_middle-155,11)
+            pdf.drawText(text) 
+
+            # BODY :::::: COMPLAIMANT
+            pdf.setFontSize(13)
+            pdf.drawString(tab_one,y_middle-215,section[3])
+            pdf.line(tab_one, y_middle-220, x_middle+15, y_middle-220)
+            pdf.setFontSize(11)
+            pdf.drawString(tab_two,y_middle-235,f'- Tipo : {self.reclamo_tipo}')
+            pdf.drawString(tab_two,y_middle-250,f'- Pedido : ')
+            text = self.__create_text_object(pdf,self.reclamo_pedido,x+80,y_middle-250,11)
+            pdf.drawText(text) 
+            pdf.drawString(tab_two,y_middle-265,f'- Descripcion : ')
+            text = self.__create_text_object(pdf,self.reclamo_descripcion,x+105,y_middle-265,11)
+            pdf.drawText(text) 
+
+            # FOOTER :::: DATE
+            pdf.setFontSize(11)
+            pdf.drawString(tab_one,y+10,self.reclamo_fecha)
+
+            # PDF :::::: SAVING
+            self.reclamo_pdf = f"{BASE_DIR}/media/reclamos/{file_name}"
+            pdf.save()
+
+            return True
+
+        except:
+     
+            return False  
+
+class Email(ABC):
+
+    @abstractmethod
+    def send_email(self):
+
+        try:
+
+            # variables for work
+            BASE_DIR        = Path(__file__).resolve().parent.parent
+            media_file      = f"{BASE_DIR}/complaint/media/reclamos/rv_{self.id}.pdf"
+            email_sender    = config("email_sender")
+            email_password  = config("email_password")
+            email_receiver  = [self.reclamante_correo]  if self.apoderado_correo == ""  else [self.reclamante_correo, self.apoderado_correo] 
+            subject         = "Reporte Reclamo"
+            body            = "Estimado Usuario, procedemos a generarle una copia de su reclamo"
+
+            # Create the container email message.
+            msg             = EmailMessage()
+            msg['From']     = email_sender
+            msg['To']       = email_receiver
+            msg['Subject']  = subject
+            msg.set_content(body)
+
+            # Make the message multipart
+            msg.add_alternative(body, subtype='html')
+
+            # Attach the image file
+            with open(media_file, 'rb') as attachment_file:
+                file_data = attachment_file.read()
+                file_name = attachment_file.name.split("/")[-1]
+
+            attachment = MIMEBase('application', 'octet-stream')
+            attachment.set_payload(file_data)
+            encoders.encode_base64(attachment)
+            attachment.add_header('Content-Disposition', f'attachment; filename="{file_name}"')
+            msg.attach(attachment)
+
+            # add SSL (layer of security)
+            context = ssl.create_default_context()
+
+            # send email
+            with smtplib.SMTP_SSL('smtp.gmail.com',465,context=context) as s:
+                s.login(email_sender,email_password)
+                s.sendmail(email_sender,email_receiver,msg.as_string())
+
+            return True
+
+        except:
+
+            return False
+
+class Formulario(Claimant, Father, Item, Claim, Pdf, Email):
+
+    def __init__(self,id,reclamante_nombre,reclamante_domicilio,reclamante_tipo_documento,reclamante_numero_documento,reclamante_correo,reclamante_telefono_celular,reclamante_menor_edad,apoderado_nombre, apoderado_domicilio, apoderado_correo,apoderado_telefono_celular,bien_tipo,bien_monto,bien_descripcion,reclamo_tipo,reclamo_descripcion,reclamo_pedido,reclamo_fecha) -> None:
 
         self.id                          = id 
         Claimant.__init__(self,reclamante_nombre,reclamante_domicilio,reclamante_tipo_documento,reclamante_numero_documento,reclamante_correo,reclamante_telefono_celular,reclamante_menor_edad)
         Father.__init__(self,apoderado_nombre, apoderado_domicilio, apoderado_correo,apoderado_telefono_celular)
         Item.__init__(self,bien_tipo,bien_monto,bien_descripcion)
-        Claim.__init__(self,reclamo_tipo,reclamo_descripcion,reclamo_pedido)
+        Claim.__init__(self,reclamo_tipo,reclamo_descripcion,reclamo_pedido,reclamo_fecha)
         self.reclamo_pdf                 = None
 
     def apply_validations(self):
@@ -490,215 +692,27 @@ class Formulario(Claimant, Father, Item, Claim):
 
         return True
 
-    def __divide_long_text(self, text):
-
-        len_text    = len(text)
-        lines       = []
-        
-        if len_text < 90 :
-
-            lines.append(text)
-        
-        elif len_text < 180 :
-
-            lines.append(text[0:90])
-            lines.append(text[90:180])
-
-        else :
-
-            lines.append(text[0:90])
-            lines.append(text[90:180]) 
-            lines.append(text[180:])
-
-        return lines
-
-    def __create_text_object(self, canvas,text,x,y, fontsize):
-
-        canvas.setFontSize(fontsize)
-        text_object = canvas.beginText(x,y)
-        lines       = self.__divide_long_text(text)
-        for line in lines:
-            text_object.textLine(line)
-
-        return text_object
-
     def create_pdf(self):
 
-        try:
-
-            # GENERAL VARIABLES
-            BASE_DIR            = Path(__file__).resolve().parent.parent
-            file_name           = f"reclamo_virtual_{self.id}.pdf"
-            file_format         = "A4"
-            file_title          = f"Reclamo N°{self.id}"
-            file_restaurante    = "Nombre del Restaurante"
-            file_ruc            = f"RUC - 12345678900"
-            message_one         = '- Estimado usuario, Su solicitud está en conocimiento de las autoridades,  la cual se está analizando para emitir una respuesta y posible solución en un plazo máximo de 15 días.'
-            message_two         = '- Conforme a lo establedico en el Código de Protección y Defensa del Consumidor este       establecimiento cuenta con un Libro de Reclamaciones a tu disposición.'
-            file_number         = f"HOJA DE RECLAMACIÓN - N°{self.id}"
-            section             = [
-                'Del Reclamante',
-                'Del Apoderado',
-                'Del Bien',
-                'Del Reclamo',
-            ]
-
-            # PDF ::::::: VARIABLES FOR SIZE
-            width, height = A4
-            y       = 0
-            y_middle= height // 2
-            y_end   = round(height)
-            x       = 0
-            x_middle= width // 2
-            x_end   = round(width)
-            tab_one = 20
-            tab_two = 30
-            
-
-            # PDF ::::::: CREATING
-            pdf = canvas.Canvas(
-                filename=f"{BASE_DIR}/complaint/media/reclamos/{file_name}",
-                pagesize=file_format
-            )
-
-            # PDF ::::::: TITLE
-            pdf.setTitle(file_title)
-
-            # HEADER ::::: NOMBRE + RUC
-            pdf.setFontSize(20)
-            pdf.drawString(tab_one,y_end-80,file_restaurante)
-            pdf.setFontSize(15)
-            pdf.drawString(tab_one,y_end-100,file_ruc)
-
-            # HEADER :::::: MESSAGE 1
-            text = self.__create_text_object(pdf,message_one,tab_one,y_end-140,11)
-            pdf.drawText(text)
-
-            # HEADER :::::: MESSAGE 2
-            text = self.__create_text_object(pdf,message_two,tab_one,y_end-170,11)
-            pdf.drawText(text)
-
-            # HEADER :::::: NUMBER OF CLAIMANT
-            pdf.rect(tab_one, y_end-240, x_middle-15,30)
-            pdf.setFontSize(15)
-            pdf.drawString(tab_two, y_end-230, file_number)
-
-            # BODY :::::::: USER 
-            pdf.setFontSize(13)
-            pdf.drawString(tab_one,y_middle+150,section[0])
-            pdf.line(tab_one, y_middle+145, x_middle, y_middle+145)
-            pdf.setFontSize(11)
-            pdf.drawString(tab_two,y_middle+130,f'- Nombre : {self.reclamante_nombre}')
-            pdf.drawString(tab_two,y_middle+115,f'- Domicilio : {self.reclamante_domicilio}')
-            pdf.drawString(tab_two,y_middle+100,f'- Tipo Documento : {self.reclamante_tipo_documento}')
-            pdf.drawString(tab_two,y_middle+85,f'- Numero Documento : {self.reclamante_numero_documento}')
-            pdf.drawString(tab_two,y_middle+70,f'- Correo : {self.reclamante_correo}')
-            pdf.drawString(tab_two,y_middle+55,f'- Telefono / Celular : {self.reclamante_telefono_celular}')
-            pdf.drawString(tab_two,y_middle+40,f'- Edad : {self.reclamante_menor_edad}')
-
-            # BODY :::::::: FATHER
-            pdf.setFontSize(13)
-            pdf.drawString(tab_one,y_middle+15,section[1])
-            pdf.line(tab_one, y_middle+10, x_middle, y_middle+10)
-            pdf.setFontSize(11)
-            pdf.drawString(tab_two,y_middle-5,f'- Nombre : {self.apoderado_nombre}')
-            pdf.drawString(tab_two,y_middle-20,f'- Domicilio : {self.apoderado_domicilio}')
-            pdf.drawString(tab_two,y_middle-35,f'- Correo : {self.apoderado_correo}')
-            pdf.drawString(tab_two,y_middle-50,f'- Telefono : {self.apoderado_telefono_celular}')
-
-            # BODY :::::::: ITEM
-            pdf.setFontSize(13)
-            pdf.drawString(tab_one,y_middle-75,section[2])
-            pdf.line(tab_one, y_middle-80, x_middle+15, y_middle-80)
-            pdf.setFontSize(11)
-            pdf.drawString(tab_two,y_middle-95,f'- Tipo : {self.bien_tipo}')
-            pdf.drawString(tab_two,y_middle-110,f'- Monto : {self.bien_monto}')
-            pdf.drawString(tab_two,y_middle-125,f'- Descripción : ')
-            text = self.__create_text_object(pdf,self.bien_descripcion,x+105,y_middle-125,11)
-            pdf.drawText(text) 
-
-            # BODY :::::: COMPLAIMANT
-            pdf.setFontSize(13)
-            pdf.drawString(tab_one,y_middle-175,section[3])
-            pdf.line(tab_one, y_middle-180, x_middle+15, y_middle-180)
-            pdf.setFontSize(11)
-            pdf.drawString(tab_two,y_middle-195,f'- Tipo : {self.reclamo_tipo}')
-            pdf.drawString(tab_two,y_middle-210,f'- Descripcion : ')
-            text = self.__create_text_object(pdf,self.reclamo_descripcion,x+105,y_middle-210,11)
-            pdf.drawText(text) 
-            pdf.drawString(tab_two,y_middle-255,f'- Pedido : ')
-            text = self.__create_text_object(pdf,self.reclamo_pedido,x+80,y_middle-255,11)
-            pdf.drawText(text) 
-
-            # FOOTER :::: DATE
-            pdf.setFontSize(11)
-            pdf.drawString(tab_one,y+10,self.reclamo_fecha)
-
-            # PDF :::::: SAVING
-            self.reclamo_pdf = f"{BASE_DIR}/media/reclamos/{file_name}"
-            pdf.save()
-
-            return True
-
-        except:
-
-            self.errors.append("No se pudo crear el documento de reclamación")
-            return False  
+        if not Pdf.create_pdf(self) :
+            Validations.errors.append("No se pudo crear un pdf con el documento de reclamación")
+            return False
+        
+        return True
 
     def send_email(self):
-
-        try:
-
-            # variables for work
-            BASE_DIR = Path(__file__).resolve().parent.parent
-            email_sender    = config("email_sender")
-            email_password  = config("email_password")
-            email_receiver  = [self.reclamante_correo]
-            if self.apoderado_correo != "": email_receiver.append(self.apoderado_correo)
-            subject         = "Reporte Reclamo"
-            body            = "Estimado Usuario, procedemos a generarle una copia de su reclamo"
-
-            # Create the container email message.
-            msg             = EmailMessage()
-            msg['From']     = email_sender
-            msg['To']       = email_receiver
-            msg['Subject']  = subject
-            msg.set_content(body)
-
-            # Make the message multipart
-            msg.add_alternative(body, subtype='html')
-
-            # Attach the image file
-            with open(f"{BASE_DIR}/complaint/media/reclamos/reclamo_virtual_{self.id}.pdf", 'rb') as attachment_file:
-                file_data = attachment_file.read()
-                file_name = attachment_file.name.split("/")[-1]
-
-            attachment = MIMEBase('application', 'octet-stream')
-            attachment.set_payload(file_data)
-            encoders.encode_base64(attachment)
-            attachment.add_header('Content-Disposition', f'attachment; filename="{file_name}"')
-            msg.attach(attachment)
-
-            # add SSL (layer of security)
-            context = ssl.create_default_context()
-
-            # send email
-            with smtplib.SMTP_SSL('smtp.gmail.com',465,context=context) as s:
-                s.login(email_sender,email_password)
-                s.sendmail(email_sender,email_receiver,msg.as_string())
-
-            return True
-
-        except:
-
-            self.errors.append("No se pudo generar el email para usuario")
+       
+        if not Email.send_email(self) :
+            Validations.errors.append("No se pudo enviar el documento de reclamación por correo")
             return False
+        
+        return True
 
 if __name__ == "__main__":
 
     queja = Formulario(
         # ID
-        id="101",
+        id="---",
         # RECLMANTE
         reclamante_nombre = "Anonimo",
         reclamante_domicilio = "Casa Anonima 123",
@@ -715,16 +729,16 @@ if __name__ == "__main__":
         # BIEN
         bien_tipo = "producto",
         bien_monto = "1000.99",
-        bien_descripcion = "Descripción del bien",
+        bien_descripcion = "Descripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamo",
         # RECLAMO
         reclamo_tipo = "queja",
-        reclamo_descripcion= "Descripción del reclamo",
-        reclamo_pedido= "Descripcion del pedido",   
+        reclamo_pedido= "Descripcion del pedido", 
+        reclamo_descripcion= "Descripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamo",
+        reclamo_fecha= "today"  
     )
 
     print(queja)
     print(queja.apply_validations())
     print(queja.errors)
-
-    # queja.create_pdf()
-    # queja.send_email()
+    queja.create_pdf()
+    queja.send_email()
