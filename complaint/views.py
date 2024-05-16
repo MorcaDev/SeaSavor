@@ -12,7 +12,7 @@ from .models import LibroRelamacion
 # Create your views here.
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
-def libro(request):
+def book(request):
 
     if request.method == 'GET':
         return  render(request, 'book.html')
