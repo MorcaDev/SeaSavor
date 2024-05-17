@@ -1,7 +1,6 @@
 import json
 from datetime import date
 
-from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods 
 from django.views.decorators.csrf import csrf_exempt
@@ -100,7 +99,7 @@ def post_algorithm(formulario):
 
 # Views
 @require_http_methods(["POST"])
-def api_form(request):
+def form_api(request):
 
     # id value
     new_id      = id_alogirhtm()
@@ -132,7 +131,7 @@ def api_form(request):
 
 @csrf_exempt
 @require_http_methods(["POST"])
-def api_json(request):
+def rest_api(request):
 
     # json formater
     query_dict  = json.loads(request.body)

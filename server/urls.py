@@ -2,9 +2,9 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from .views import api_form, api_json
+from .views import form_api, rest_api
 
 urlpatterns = [
-    path('api_form/', api_form, name="api_form"),
-    path('api_json/', api_json, name="api_json"),
+    path('form_api/', form_api, name="form_api"),
+    path('rest_api/', rest_api, name="rest_api"),
 ] + static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
