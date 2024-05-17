@@ -40,6 +40,14 @@ def post_algorithm(formulario):
             safe=True,
             status=400)
 
+    # pdf creation
+    if not formulario.create_pdf() :
+        return JsonResponse(
+            {"message"  :"Service Not Available", 
+             "error"    : formulario.errors},
+            safe=True,
+            status=503)
+        
     # db insertion
     try :
 
@@ -69,14 +77,6 @@ def post_algorithm(formulario):
 
     except:
 
-        return JsonResponse(
-            {"message"  :"Service Not Available", 
-             "error"    : formulario.errors},
-            safe=True,
-            status=503)
-        
-    # pdf creation
-    if not formulario.create_pdf() :
         return JsonResponse(
             {"message"  :"Service Not Available", 
              "error"    : formulario.errors},

@@ -45,8 +45,8 @@ class LibroRelamacion(models.Model):
     reclamo_fecha       = models.DateField(blank=False, null=False)
 
     # del seguimiento
-    reclamo_pdf         = models.FileField(upload_to="reclamos/", blank=True, null=True)
-    solucion_pdf        = models.FileField(upload_to="soluciones/", blank=True, null=True)
+    reclamo_pdf         = models.FileField(upload_to="complaints/", blank=True, null=True)
+    solucion_pdf        = models.FileField(upload_to="answers/", blank=True, null=True)
 
     class Meta:
         db_table = "LibroRelamacion"

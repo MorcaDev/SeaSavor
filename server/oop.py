@@ -492,11 +492,12 @@ class Pdf(ABC):
             # GENERAL VARIABLES
             BASE_DIR            = Path(__file__).resolve().parent.parent
             file_name           = f"rv_{self.id}.pdf"
-            file_path           = f"{BASE_DIR}/server/media/complaints/{file_name}"
+            server_path         = str(BASE_DIR /  "server" / "media" / "complaints" / file_name)
+            media_path          = f"complaints/{file_name}"
             file_format         = "A4"
             file_title          = f"Reclamo N°{self.id}"
-            file_restaurante    = "Cevicheria Puerto Nuevo"
-            file_ruc            = f"RUC - 20504332340"
+            file_restaurante    = "Sea Savor"
+            file_ruc            = f"RUC - 20504332341"
             message_one         = 'Estimado usuario, Su solicitud está en conocimiento de las autoridades, la cual se está analizando para emitir una respuesta y posible solución en un plazo máximo de 15 días. Conforme a lo establecido en el Código de Protección y Defensa del Consumidor este establecimiento cuenta con un Libro de Reclamaciones a tu disposición.'
             file_number         = f"HOJA DE RECLAMACIÓN - N°{self.id}"
             section             = [
@@ -519,9 +520,11 @@ class Pdf(ABC):
 
             # PDF ::::::: CREATING
             pdf = canvas.Canvas(
-                filename= file_path,
+                filename= server_path,
                 pagesize= file_format
             )
+
+            print("created")
 
             # PDF ::::::: TITLE
             pdf.setTitle(file_title)
@@ -593,7 +596,7 @@ class Pdf(ABC):
             pdf.drawString(tab_one,y+10,self.reclamo_fecha)
 
             # PDF :::::: SAVING
-            self.reclamo_pdf = file_path
+            self.reclamo_pdf = media_path
             pdf.save()
 
             return True
@@ -609,10 +612,10 @@ class Email(ABC):
 
         try:
 
-            # variables for work
+            # GENERAL VARIABLES
             BASE_DIR        = Path(__file__).resolve().parent.parent
             file_name       = f"rv_{self.id}.pdf"
-            media_file      = f"{BASE_DIR}/server/media/complaints/{file_name}"
+            server_path     = str(BASE_DIR /  "server" / "media" / "complaints" / file_name)
             email_sender    = config("email_sender")
             email_password  = config("email_password")
             email_receiver  = [self.reclamante_correo]  if self.apoderado_correo == ""  else [self.reclamante_correo, self.apoderado_correo] 
@@ -630,7 +633,7 @@ class Email(ABC):
             msg.add_alternative(body, subtype='html')
 
             # Attach the image file
-            with open(media_file, 'rb') as attachment_file:
+            with open(server_path, 'rb') as attachment_file:
                 file_data = attachment_file.read()
                 file_name = attachment_file.name.split("/")[-1]
 
@@ -736,7 +739,8 @@ if __name__ == "__main__":
     )
 
     print(queja)
-    print(queja.apply_validations())
-    print(queja.errors)
+    # print(queja.apply_validations())
+    # print(queja.errors)
     queja.create_pdf()
+    print(queja.reclamo_pdf)
     queja.send_email()
