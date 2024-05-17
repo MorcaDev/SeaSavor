@@ -482,7 +482,6 @@ class Pdf(ABC):
         for line in lines:
             text_object.textLine(line)
 
-        print("2nd method")
         return text_object
 
     @abstractmethod
@@ -534,10 +533,8 @@ class Pdf(ABC):
             pdf.drawString(tab_one,y_end-110,file_ruc)
 
             # HEADER :::::: MESSAGE 
-            print("before")
             text = self.__create_text_object(pdf,message_one,tab_one,y_end-143,11)
             pdf.drawText(text)
-            print("later")
 
             # HEADER :::::: NUMBER OF CLAIMANT
             pdf.rect(tab_one, y_end-230, x_middle-15,30)
