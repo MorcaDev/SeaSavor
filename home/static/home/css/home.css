@@ -20,7 +20,6 @@ body{
     max-width: 2560px;
     height: auto;
     margin: 0px auto;
-    background-color: rgb(204, 198, 198);
     font-family: sans-serif;
 }
 
@@ -206,6 +205,7 @@ main{
     width: 100%;
     height: auto;
     padding: 128px 0px;
+    background-color: #ffffff;
 }
     #aboutus, #schedule, #workwithus{
         display: flex;
@@ -573,7 +573,7 @@ footer{
         order: 1;
     }
 
-    /*MAIN-menu*/
+    /*MAIN-MENU*/
     .menu_section ul{
         justify-content: space-between;
     }
@@ -608,7 +608,7 @@ footer{
 /* TABLET I */
 @media (min-width: 992px) {
     
-    /*MAIN-menu*/
+    /*MAIN-MENU*/
     .menu_section ul{
         max-width: 930px;
     }
@@ -644,7 +644,7 @@ footer{
             color: #000;
         }
 
-    /*MAIN-menu*/
+    /*MAIN-MENU*/
     .menu_section ul{
         max-width: 960px;
     }

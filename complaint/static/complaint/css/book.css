@@ -20,11 +20,10 @@ body{
     max-width: 2560px;
     height: auto;
     margin: 0px auto;
-    background-color: rgb(204, 198, 198);
     font-family: sans-serif;
 }
 
-/*-----------------------------------*/
+/*----------------------------------*/
 
 header{
     display: block;
@@ -62,7 +61,7 @@ header{
             max-width: 450px;
             font-size: 26px;
             transition: .3s ease;
-            background-color:  rgb(34, 37, 49);
+            background-color:  rgb(48, 71, 109) ;
             
         }.off_screen_menu.active {
             left: 0;
@@ -96,7 +95,7 @@ header{
             width: 100%;
             height: auto;
             padding: 6px 16px;
-            background-color: rgb(34, 37, 49) ;
+            background-color: rgb(48, 71, 109) ;
         }
             .nav_menu {
                 display: inline-block;
@@ -138,16 +137,17 @@ header{
                         transform: translate(-50%, -50%) rotate(-45deg);
                 }
             .nav_logo{
-                    display: inline-block;
-                    width: auto;
-                    height: auto;
+                display: inline-block;
+                margin-left: 5px;
+                width: auto;
+                height: auto;
             }
                 .nav_logo img{
-                        width: 55px;
-                        height: 55px;
+                    width: 45px;
+                    height: 45px;
                 }
             .nav_buttons{
-                    display: none
+                display: none
             }
     .banner{
         display: flex;
@@ -159,35 +159,44 @@ header{
         min-height: 100vh;
         padding-top: 100px;
         padding-bottom: 50px;
-        background: url('../assets/imagen.jpg') ;
-        background-size: cover;
-        background-repeat: no-repeat;
+        background: url('../assets/banner_mobile.jpg') top center;
+        background-size: 100% 100%;
         background-attachment: fixed;
     }
+        .banner img{
+            width: 180px;
+            height:180px;
+        }
         .banner h1{
             width: 90%;
-            margin: 22px 0px;
+            margin: 21px 0px;
             text-align: center;
-            font-size: 34px;
-            line-height: 30px;
-            font-weight: bold;
+            font-size: 18px;
+            line-height: 18px;
         }
-        .banner span{
-            display: block;
-            width: 32px;
-            height: 2px;
-            margin: 24px auto;
-            background-color: #000;
+        .banner div{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            max-width: 425px;
+            height: auto;
         }
-        .banner p{
-            width: auto;
-            max-width: 800px;
-            margin: 0px auto;
-            padding: 0px 15px;
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-        }
+            .banner div a{
+                display: block;
+                width: 100%;
+                height: auto;
+                margin-bottom: 5px;
+                padding: 7px 14px;
+                line-height: 21px;
+                color: rgba(255,255,255);
+                background-color: rgb(48, 71, 109) ;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                border-radius: 20px;
+            }
 
 /*----------------------------------*/
 
@@ -373,12 +382,14 @@ main{
             display: block;
         }
 /*----------------------------------*/
+/*----------------------------------*/
+
 footer{
     display: block;
     margin-bottom: 135px;
     width: 100%;
     height: auto;
-    background-color: rgb(34, 37, 49);
+    background-color: rgb(48, 71, 109) ;
 }
     .info{
         display: flex;
@@ -387,17 +398,17 @@ footer{
         height: auto;
         padding: 20px 0px;
     }
-        .info_logo, .info_seccion, .info_libro, .info_redes{
+        .info_logo, .info_section, .info_more, .info_media{
             display: inline-block;
             width: 100%;
             height: auto;
             padding: 0px 20px 30px 20px;
         }
-                .info_logo img{
-                    width: 80px;
-                    height: 80px;
-                }
-            .info_seccion h3, .info_libro h3{
+            .info_logo img{
+                width: 80px;
+                height: 80px;
+            }
+            .info_section h3, .info_more h3, .info_media h3{
                 margin-bottom: 5px;
                 text-align: left;
                 font-size: 24px;
@@ -405,41 +416,68 @@ footer{
                 line-height: 30px;
                 color: whitesmoke;
             }
-                .info_seccion ul li{
-                        width: 100%;
-                        height: auto;
-                        padding-bottom: 5px;
+                .info_section ul li{
+                    width: 100%;
+                    height: auto;
+                    padding-bottom: 5px;
                 }
-                    .info_seccion ul li a{
+                    .info_section ul li a{
                         text-decoration: none;
                         font-size: 13px;
                         line-height: 20px;
                         font-weight: 500;
                         color: whitesmoke;
                     }
-                .info_redes ul{
+                .info_more ul,.info_media ul{
                     display: flex;
                     flex-flow: row wrap;
                     justify-content: left;
                     align-items: center;
                 }
-                    .info_redes ul  li{
-                            margin-right: 15px;
+                    .info_more ul li, .info_media ul  li{
+                        margin-right: 15px;
+                        font-size: 13px;
+                        line-height: 20px;
+                        font-weight: 500;
+                        color: whitesmoke;
+                        padding-bottom: 5px;
                     }
-                        .info_redes ul li a{
+                        .info_more .book{
                             display: block;
                             width: 40px ;
                             height: 40px;
-                            background: url('../assets/imagen.jpg') ;
+                            background: url('../assets/book.png') ;
                             background-size: cover;
                             background-repeat: no-repeat;
-                            border-radius: 50%;
-                            
                         }
-            .info_libro span{
+                        .info_more .reference{
+                            display: block;
+                            width: 40px ;
+                            height: 40px;
+                            background: url('../assets/star.png') ;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                        }
+                        .info_media .face{
+                            display: block;
+                            width: 40px ;
+                            height: 40px;
+                            background: url('../assets/facebook.png') ;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                        }
+                        .info_media .insta{
+                            display: block;
+                            width: 40px ;
+                            height: 40px;
+                            background: url('../assets/instagram.png') ;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                        }
+            .info_more span{
                     display: block;
             }
-                .info_libro span a{
+                .info_more span a{
                     text-decoration: none;
                     font-size: 13px;
                     line-height: 20px;
@@ -492,14 +530,7 @@ footer{
             width: 44px;
             height: 44px;
             margin: 0px 2px;
-            padding: 7px;
             border-radius: 50%;
-        }
-        .extra_button .wp{
-            background-color: #25d366;
-        }
-        .extra_button .top{
-            background-color: rgb(34, 37, 49);
         }
             .extra_button a img{
                 width: 100%;
@@ -539,12 +570,20 @@ footer{
 @media (min-width: 768px) { 
 
     /*HEADER*/
+    .banner{
+        background: url('../assets/banner_desktop.jpg') top center;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+    }
     .banner div{
         justify-content: space-around;
     }
     .banner div a{
         width: 30%;
-        padding: 10px 34px;
+    }
+    .banner img{
+        width: 200px;
+        height:200px;
     }
 
     /*MAIN*/
@@ -560,7 +599,7 @@ footer{
     .info{
         padding: 40px 50px;
     }
-    .info_logo, .info_seccion, .info_libro, .info_redes{
+    .info_logo, .info_section, .info_more, .info_media{
         width: 50%;
     }
 
@@ -583,7 +622,7 @@ footer{
     }
 
     /*FOOTER*/
-    .info_logo, .info_seccion, .info_libro, .info_redes{
+    .info_logo, .info_section, .info_more, .info_media{
         width: 25%;
     }
 }
@@ -626,10 +665,9 @@ footer{
         height: 150px;
     }
         .extra_button a{
-            width: 55px;
-            height: 55px;
+            width: 52px;
+            height: 52px;
             margin: 8px 2px;
-            padding: 7px;
         }
         .extra_button .wp{
             order: 2;
