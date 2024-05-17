@@ -99,18 +99,6 @@ def post_algorithm(formulario):
         status=200)  
 
 # Views
-@require_http_methods(["GET"])
-def book(request):
-
-    try:
-        return render(request, 'book.html')
-    
-    except:
-        return JsonResponse(
-            {"message":"Service Not Available"},
-            safe=True,
-            status=500)
-
 @require_http_methods(["POST"])
 def api_form(request):
 

@@ -53,3 +53,4 @@ class LibroRelamacion(models.Model):
 
     def  __str__(self):
         return f'n°{self.id} ,  {self.reclamante_nombre},  {self.reclamo_fecha}'
+

@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('SeaSavor/', include("home.urls")),
-    path('SeaSavor/', include("complaint.urls")),
+    path('SeaSavor/', include("client.urls")),
+    path('SeaSavor/', include("server.urls")),
 ]

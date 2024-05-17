@@ -6,9 +6,9 @@
 *.pdf
 
 # paths
-/complaint/migrations
-/home/migrations
+/client/migrations
+/server/migrations
 /staticfiles-cdn
 __pycache__
-/complaint/media
+/server/media
 /venv

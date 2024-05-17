@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home',
-    'complaint',
+    'client',
+    'server',
 ]
 
 MIDDLEWARE = [
@@ -56,8 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            '../home/templates',
-            '../complaint/templates',
+            '../client/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

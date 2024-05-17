@@ -492,7 +492,7 @@ class Pdf(ABC):
             # GENERAL VARIABLES
             BASE_DIR            = Path(__file__).resolve().parent.parent
             file_name           = f"rv_{self.id}.pdf"
-            file_path           = f"{BASE_DIR}/complaint/media/reclamos/{file_name}"
+            file_path           = f"{BASE_DIR}/server/media/complaints/{file_name}"
             file_format         = "A4"
             file_title          = f"Reclamo N°{self.id}"
             file_restaurante    = "Cevicheria Puerto Nuevo"
@@ -593,7 +593,7 @@ class Pdf(ABC):
             pdf.drawString(tab_one,y+10,self.reclamo_fecha)
 
             # PDF :::::: SAVING
-            self.reclamo_pdf = f"{BASE_DIR}/media/reclamos/{file_name}"
+            self.reclamo_pdf = file_path
             pdf.save()
 
             return True
@@ -611,7 +611,8 @@ class Email(ABC):
 
             # variables for work
             BASE_DIR        = Path(__file__).resolve().parent.parent
-            media_file      = f"{BASE_DIR}/complaint/media/reclamos/rv_{self.id}.pdf"
+            file_name       = f"rv_{self.id}.pdf"
+            media_file      = f"{BASE_DIR}/server/media/complaints/{file_name}"
             email_sender    = config("email_sender")
             email_password  = config("email_password")
             email_receiver  = [self.reclamante_correo]  if self.apoderado_correo == ""  else [self.reclamante_correo, self.apoderado_correo] 
