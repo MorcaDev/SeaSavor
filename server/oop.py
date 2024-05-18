@@ -524,8 +524,6 @@ class Pdf(ABC):
                 pagesize= file_format
             )
 
-            print("created")
-
             # PDF ::::::: TITLE
             pdf.setTitle(file_title)
 
@@ -709,38 +707,3 @@ class Formulario(Claimant, Father, Item, Claim, Pdf, Email):
         
         return True
 
-if __name__ == "__main__":
-
-    queja = Formulario(
-        # ID
-        id="---",
-        # RECLMANTE
-        reclamante_nombre = "Anonimo",
-        reclamante_domicilio = "Casa Anonima 123",
-        reclamante_tipo_documento = "dni",
-        reclamante_numero_documento= "12345678",
-        reclamante_correo= "abc@abc.com",
-        reclamante_telefono_celular = "123456789",
-        reclamante_menor_edad = "menor", # valid for older
-        # APODERADO
-        apoderado_nombre = "Papa de Anonimo",
-        apoderado_domicilio = "La misma cuadra",
-        apoderado_correo = "abc@abc.com",
-        apoderado_telefono_celular = "123456789",
-        # BIEN
-        bien_tipo = "producto",
-        bien_monto = "1000.99",
-        bien_descripcion = "Descripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamo",
-        # RECLAMO
-        reclamo_tipo = "queja",
-        reclamo_pedido= "Descripcion del pedido", 
-        reclamo_descripcion= "Descripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamoDescripción del reclamo",
-        reclamo_fecha= "today"  
-    )
-
-    print(queja)
-    # print(queja.apply_validations())
-    # print(queja.errors)
-    queja.create_pdf()
-    print(queja.reclamo_pdf)
-    queja.send_email()

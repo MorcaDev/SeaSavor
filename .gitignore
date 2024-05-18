@@ -1,14 +1,10 @@
 # extensions
 *.env
-*db.sqlite3
-*.jpg
-*.png
-*.pdf
+*.sqlite3
+*.gitignore
 
 # paths
-/client/migrations
-/server/migrations
-/staticfiles-cdn
 __pycache__
+/client/static
 /server/media
 /venv
