@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea Savor</title>
+    <meta name="description" content="Discover a world of exquisite seafood dishes at SeaSavor. Our restaurant offers a variety of fresh catches prepared with passion and expertise. Join us for an unforgettable dining experience by the sea.">
+    <meta name="keywords" content="seafood restaurant, ocean cuisine, fresh seafood, maritime dining, seafood dishes">
+    <!--  CSS & LIBRARIES  -->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <!-- NAVBAR CONTAINER -->
+        <section class="nav_container">
+            <!-- LATERAL MENU -->
+            <div class="off_screen_menu">
+                <ul>
+                    <li><a target="_blank" href="https://squareup.com/us/es/appointments">Booking</a></li>
+                    <li><a target="_blank" href="https://about.rappi.com/">Delivery</a></li>
+                    <li><a target="_blank" href="{% static 'assets/promotions.pdf'%}">Promotions</a></li>
+                    <li><hr></li>
+                    <li><a href="#aboutus">About Us</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#locations">Location</a></li>
+                    <li><a href="#workwithus">Work With Us</a></li>
+                </ul>
+            </div>
+            <!-- NAVBAR -->
+            <nav class="nav">
+                <!-- BUGER BUTTON -->
+                <div class="nav_menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <!-- LOGO -->
+                <div class="nav_logo">
+                    <img src="{% static 'assets/logo.png'%}" alt="SeaSavor restaurant logo: A stylized crab representing the freshness and quality of our seafood offerings.">
+                </div>
+                <!-- OPTIONS -->
+                <div class="nav_buttons">
+                    <a target="_blank" href="https://squareup.com/us/es/appointments">Booking</a>
+                    <a target="_blank" href="https://about.rappi.com/">Delivery</a>
+                    <a target="_blank" href="{% static 'assets/promotions.pdf'%}">Promotions</a>
+                </div>
+            </nav>
+        </section>
+        <!-- BANNER -->
+        <section class="banner">
+            <img src="{% static 'assets/logo.png'%}" alt="SeaSavor restaurant logo: A stylized crab representing the freshness and quality of our seafood offerings.">
+            <h1>Sea Savor, From the Ocean to Your Plate</h1>
+            <div>
+                <a target="_blank" href="https://squareup.com/us/es/appointments">Booking</a>
+                <a target="_blank" href="https://about.rappi.com/">Delivery</a>
+                <a target="_blank" href="{% static 'assets/promotions.pdf'%}">Promotions</a>
+            </div>
+        </section>
+    </header>
+
+
+    <script src="{% static 'js/home.js' %}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
