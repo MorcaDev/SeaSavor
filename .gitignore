@@ -5,6 +5,7 @@
 
 # paths
 __pycache__
-/client/static
-/server/media
+# /client/static
+# /server/media
+/server/media/doc
 /venv
