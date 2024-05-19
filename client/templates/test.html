@@ -290,6 +290,47 @@
         </section>
     </main>
 
+    <!-- FOOTER -->
+    <footer>
+        <!-- INFO -->
+        <section class="info">
+            <!-- LOGO -->
+            <div class="info_logo"> 
+                <img src="{% static 'assets/logo.png'%}" alt="SeaSavor restaurant logo: A stylized crab representing the freshness and quality of our seafood offerings.">
+            </div>
+            <!-- SECTIONS -->
+            <div class="info_section">
+                <h3>About Sea Savor</h3><br>
+                <ul>
+                    <li><a href="#aboutus">About Us</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#locations">Location</a></li>
+                    <li><a href="#workwithus">Work With Us</a></li>
+                </ul>
+            </div>
+            <!-- MORE INFORMATION -->
+            <div class="info_more">
+                <h3>More Information</h3> 
+                <ul>
+                    <li><a class="book" target="_blank" href="{% url 'book' %}" alt="link for complaints book"></a></li>
+                    <li><a class="reference" target="_blank" href="https://dontito.pe/" alt="link for reference website"></a></li>
+                </ul>
+            </div>
+            <!-- MEDIA  -->
+            <div class="info_media">
+                <h3>Social Media Apps</h3>
+                <ul>
+                    <li><a class="insta" target="_blank" href="https://www.instagram.com/" alt="link fot instagram aacount"></a></li>
+                    <li><a class="face" target="_blank" href="https://www.facebook.com/" alt="link for facebook account"></a></li>
+                </ul>
+            </div>
+        </section>
+        <!-- COPY RIGHT -->
+        <div class="copyright">
+            <span>© SeaSavor Restaurant, 2024. All Rights Reserved</span>
+        </div>
+    </footer>
 
     <script src="{% static 'js/home.js' %}"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
