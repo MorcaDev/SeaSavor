@@ -8,7 +8,6 @@ def home(request):
 
     try:
 
-        return render(request,'test.html',{})
         return render(request,'home.html',{})
     
     except:
