@@ -64,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            '../client/templates',
+            os.path.join(BASE_DIR, 'client/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
