@@ -8,7 +8,7 @@ def home(request):
 
     try:
 
-        return render(request,'home.html')
+        return render(request,'home.html',{})
     
     except:
         return JsonResponse(
@@ -20,7 +20,7 @@ def home(request):
 def book(request):
 
     try:
-        return render(request, 'book.html')
+        return render(request, 'book.html', {})
     
     except:
         return JsonResponse(
