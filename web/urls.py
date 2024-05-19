@@ -21,6 +21,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('SeaSavor/', include("client.urls")),
-    path('SeaSavor/', include("server.urls")),
+    path('', include("client.urls")),
+    path('', include("server.urls")),
 ]  + static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
